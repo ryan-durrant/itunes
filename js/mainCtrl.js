@@ -6,7 +6,7 @@ angular.module('itunes').controller('mainCtrl', function($scope, itunesService){
       height: '110px',
       sortInfo: {fields: ['Song', 'Artist', 'Collection', 'Type'], directions: ['asc']},
       columnDefs: [
-        {field: 'Play', displayName: 'Play', width: '40px', cellTemplate: '<div class="ngCellText" ng-class="col.colIndex()"><a href="{{row.getProperty(col.field)}}"><img src="http://www.icty.org/x/image/Miscellaneous/play_icon30x30.png"></a></div>'},
+        {field: 'Play', displayName: 'Play', width: '40px', cellTemplate: '<div class="ngCellText" ng-class="col.colIndex()"><a href="{{row.getProperty(col.field)}}" target="_blank"><img src="http://www.icty.org/x/image/Miscellaneous/play_icon30x30.png"></a></div>'},
         {field: 'Artist', displayName: 'Artist'},
         {field: 'Song', displayName: 'Song Title'},
         {field: 'Collection', displayName: 'Collection'},
@@ -27,9 +27,9 @@ angular.module('itunes').controller('mainCtrl', function($scope, itunesService){
 
     //Code here
   $scope.getSongData = function(){
-    console.log($scope.artist);
+    //console.log($scope.artist);
     itunesService.getSongData($scope.artist).then(function(itunesData){
-      $scope.songData = itunesData;
+      $scope.songData = itunesService.cleanData(itunesData);
     });
   };
 
